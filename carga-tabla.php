@@ -148,24 +148,26 @@
                   <!-- /.card-body -->
                   <div class="card-footer clearfix">
 
-                    <form id="formTable" action="" method="post" @submit="submitUploadTable" enctype="multipart/form-data">
+                    <form id="formTable" class="needs-validation" method="post" @submit="submitUploadTable" enctype="multipart/form-data" novalidate>
                       <div class="form-group">
                         <label for="tableInputFile">Remplazar actual tabla</label>
                         <div class="input-group">
                           <div class="custom-file">
                             <input required id="tableInputFile" ref="myFileTable" name="tableInputFile" @change="validInputFile" type="file" class="custom-file-input">
                             <label class="custom-file-label" for="tableInputFile">Elegir Tabla</label>
-                            <div class="invalid-feedback">
-                              {{ fileInvalid }}
-                            </div>
+
                           </div>
 
                           <div class="input-group-append">
                             <button id="send" ype="submit" class="input-group-text">Subir</button>
                           </div>
 
-
                         </div>
+                        
+                        <div class="invalid-feedback">
+                          {{ fileInvalid }}
+                        </div>
+
                       </div>
                     </form>
 
