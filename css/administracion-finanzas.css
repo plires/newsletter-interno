@@ -1,0 +1,25 @@
+/* Administracion y Finanzas */
+
+#comment_administracion_finanzas { display: none; }
+#administracion_finanzas,
+#comment_table_a,
+#comment_table_b,
+#comment_table_c,
+#observations_table { display: none; }
+#newsletter_publicado .card-body,
+#tabla_publicada .card-body { background: #ececec; }
+#tabla_publicada .col-md-5 { display: flex; flex-direction: column; justify-content: space-between; }
+
+#preview_administracion_finanzas .invalid-feedback { display: inline-block; }
+
+@media (min-width: 576px) {
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+
+}
+@media (min-width: 1140px) {
+
+}
+/* Administracion y Finanzas end */

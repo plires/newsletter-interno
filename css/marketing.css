@@ -1,0 +1,17 @@
+/* Marketing */
+
+#comment_marketing { display: none; }
+#marketing { display: none; }
+#newsletter_publicado .card-body { background: #ececec; }
+
+@media (min-width: 576px) {
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+
+}
+@media (min-width: 1140px) {
+
+}
+/* Marketing end */

@@ -1,0 +1,16 @@
+/* Login */
+
+.login .content-wrapper { margin: 0!important; display: flex; min-height: 100vh; justify-content: center; align-items: center; }
+.login .content-wrapper .content { min-width: 35%; }
+
+@media (min-width: 576px) {
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+
+}
+@media (min-width: 1140px) {
+
+}
+/* Login end */

@@ -1,0 +1,21 @@
+/* Gerencia General */
+
+#comment_gerencia_general {
+  display: none;
+}
+#gerencia_general {
+  display: none;
+}
+
+@media (min-width: 576px) {
+}
+#newsletter_publicado .card-body {
+  background: #ececec;
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+}
+@media (min-width: 1140px) {
+}
+/* Gerencia General end */
