@@ -9,6 +9,8 @@
   "author": "Pablo Lires",
   "license": "ISC",
   "dependencies": {
-    "admin-lte": "^3.0.5"
+    "admin-lte": "^3.0.5",
+    "moment": "^2.29.1",
+    "tempusdominus-bootstrap-4": "^5.39.0"
   }
 }
