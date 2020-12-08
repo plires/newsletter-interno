@@ -10,20 +10,25 @@
 	setlocale(LC_TIME, 'es_ES');
 	date_default_timezone_set('America/Argentina/Buenos_Aires');
 
+	if ($_POST['action'] === 'add' || $_POST['action'] === 'edit') {
+		$id = (int)$_POST['idNewsletter'];
+		$idEventCalendar = (int)$_POST['idEventCalendar'];
+
+		$dateExplode = explode('/', $_POST['inputDate']);
+		$month = (int)$dateExplode[1];
+		$year = (int)$dateExplode[2];
+		$today = date("Y-m-d H:i:s");
+
+		$dateFormatDB = Carbon::createFromFormat('d/m/Y', $_POST['inputDate'])->toDateString();
+	}
+
 	switch ($_POST['action']) {
 		case 'add':
-
-			$id = (int)$_POST['idNewsletter'];
-
-			$dateExplode = explode('/', $_POST['inputDate']);
-			$month = (int)$dateExplode[1];
-			$year = (int)$dateExplode[2];
-			$today = date("Y-m-d H:i:s");
-
-			$dateFormatDB = Carbon::createFromFormat('d/m/Y', $_POST['inputDate'])->toDateString();
 			
 			$sql = "INSERT INTO calendars values(default, :month, :year, :date, :description, :time_init, :time_end, :newsletter_id, :created_at, :updated_at)";
+
 		  $stmt = $db->prepare($sql);
+		  
 		  $stmt->bindValue(":month", $month, PDO::PARAM_INT);
 		  $stmt->bindValue(":year", $year, PDO::PARAM_INT);
 		  $stmt->bindValue(":date", $dateFormatDB, PDO::PARAM_STR);
@@ -40,16 +45,6 @@
 			break;
 
 			case 'edit':
-
-			$id = (int)$_POST['idNewsletter'];
-			$idEventCalendar = (int)$_POST['idEventCalendar'];
-
-			$dateExplode = explode('/', $_POST['inputDate']);
-			$month = (int)$dateExplode[1];
-			$year = (int)$dateExplode[2];
-			$today = date("Y-m-d H:i:s");
-
-			$dateFormatDB = Carbon::createFromFormat('d/m/Y', $_POST['inputDate'])->toDateString();
 			
 			$sql = "
 				UPDATE calendars 
@@ -90,11 +85,6 @@
 
 		  echo json_encode($result);
 			break;
-		
-		default:
-			# code...
-			break;
 	}
-	
 
 ?>
