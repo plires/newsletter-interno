@@ -65,11 +65,9 @@
       <!-- Main content -->
       <section class="content">
 
-        <div id="loader" class="text-center">
-          <div class="spinner-border" role="status">
-            <span class="sr-only">Cargando...</span>
-          </div>
-        </div>
+        <!-- Loader -->
+        <?php require('includes/loader.inc.php'); ?>
+        <!-- Loader end -->
 
         <div class="container">
 
@@ -79,35 +77,9 @@
             </div>
           </div>
 
-          <!-- Listado de Newsletters del año actual -->
-          <section class="row">
-            <div class="col-md-12">
-
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Newsletters del <?= date('Y'); ?></h3>
-                </div>
-
-                <div class="card-body">
-                  <ul v-if="newslettersCurrentYear" class="pagination pagination-month justify-content-center">
-
-                    <li v-for="newsletter in newslettersCurrentYear" :key="newsletter.id" :class="['page-item', newsletterActive(newsletter.month)]">
-                      <button class="page-link" @click="setCurrentNewsletter(newsletter.id, 'gerencia_talento', 'preview_gerencia_talento')">
-                          <p class="page-month">{{ newsletter.name_month }}</p>
-                          <p class="page-year">{{ newsletter.year }}</p>
-                      </button>
-                    </li>
-                  
-                  </ul>
-
-                  <p v-else>Aún no hay Newsletters cargados en el <?= date('Y'); ?></p>
-                </div>
-                
-              </div>
-
-            </div>
-          </section>
-          <!-- Listado de Newsletters del año actual end -->
+          <!-- Lista de los ultimos 15 Newsletters -->
+          <?php require('includes/header_list_newsletters.inc.php'); ?>
+          <!-- Lista de los ultimos 15 Newsletters end -->
 
           <!-- Preview -->
           <section v-if="currentNewsletter.execute == 0" class="row">

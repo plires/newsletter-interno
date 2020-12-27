@@ -63,17 +63,15 @@
       <!-- Main content -->
       <section class="content">
 
-        <div id="loader" class="text-center">
-          <div class="spinner-border" role="status">
-            <span class="sr-only">Cargando...</span>
-          </div>
-        </div>
+        <!-- Loader -->
+        <?php require('includes/loader.inc.php'); ?>
+        <!-- Loader end -->
 
         <div class="container">
 
           <div class="row">
             <div class="col-md-12 text-center">
-              <h1>Listado de Newsletters del año</h1>
+              <h1>Últimos 15 Newsletters</h1>
             </div>
           </div>
 

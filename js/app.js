@@ -137,8 +137,8 @@ let app = new Vue({
     * @param month {Number} - Numero del mes
     * @return {string} - nombre de la clase que se agrega al li del mes activo en el menu de meses
     */
-  	newsletterActive: function(month) { 
-      if ( month === this.currentNewsletter.month ) {
+  	newsletterActive: function(month, year) { 
+      if ( month === this.currentNewsletter.month && year === this.currentNewsletter.year ) {
       	return 'active';
       }
     },
