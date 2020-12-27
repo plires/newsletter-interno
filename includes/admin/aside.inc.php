@@ -10,7 +10,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        <img src="img/logo-vistage-20-anos.gif" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
         <a href="logout.php" class="d-block"><i class="mr-2 fas fa-sign-out-alt"></i>{{ currentSector.name }}</a>
@@ -21,41 +21,13 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
+         with font-awesome or any other icon font library -->
         
         <li class="nav-header">SECTORES</li>
 
-        <li v-if="currentSector.code == 'administracion-finanzas' || currentSector.code == 'all'" class="nav-item">
-          <a href="carga-tabla.php" class="nav-link">
-            <i class="nav-icon far fa-calendar-alt"></i>
-            <p>
-              Carga de Tabla
-              <span class="badge badge-info right">2</span>
-            </p>
-          </a>
-        </li>
-
-        <li v-if="currentSector.code == 'all'" class="nav-item">
-          <a href="calendarios.php" class="nav-link">
-            <i class="nav-icon far fa-image"></i>
-            <p>
-              Calendarios
-            </p>
-          </a>
-        </li>
-
-        <li v-if="currentSector.code == 'all'" class="nav-item">
-          <a href="listado-newsletters.php" class="nav-link">
-            <i class="nav-icon far fa-image"></i>
-            <p>
-              Listado de <br>Newsletters
-            </p>
-          </a>
-        </li>
-
         <li v-if="currentSector.code == 'gerencia-general' || currentSector.code == 'all'" class="nav-item">
-          <a href="gerencia-general.php" class="nav-link">
-            <i class="nav-icon far fa-image"></i>
+          <a href="gerencia-general.php" class="nav-link <?php if ($current === 'gerencia-general') echo ' active'; ?>">
+            <i class="nav-icon fas fa-users"></i>
             <p>
               Gerencia General
             </p>
@@ -63,8 +35,8 @@
         </li>
 
         <li v-if="currentSector.code == 'gerencia-talento' || currentSector.code == 'all'" class="nav-item">
-          <a href="gerencia-talento.php" class="nav-link">
-            <i class="nav-icon far fa-image"></i>
+          <a href="gerencia-talento.php" class="nav-link <?php if ($current === 'gerencia-talento') echo ' active'; ?>">
+            <i class="nav-icon fas fa-users"></i>
             <p>
               Gerencia de Talento <br>y Negocios
             </p>
@@ -72,8 +44,8 @@
         </li>
 
         <li v-if="currentSector.code == 'administracion-finanzas' || currentSector.code == 'all'" class="nav-item">
-          <a href="administracion-finanzas.php" class="nav-link">
-            <i class="nav-icon far fa-image"></i>
+          <a href="administracion-finanzas.php" class="nav-link <?php if ($current === 'administracion-finanzas') echo ' active'; ?>">
+            <i class="nav-icon fas fa-users"></i>
             <p>
               Administracion y <br>Finanzas
             </p>
@@ -81,8 +53,8 @@
         </li>
 
         <li v-if="currentSector.code == 'marketing' || currentSector.code == 'all'" class="nav-item">
-          <a href="marketing.php" class="nav-link">
-            <i class="nav-icon far fa-image"></i>
+          <a href="marketing.php" class="nav-link <?php if ($current === 'marketing') echo ' active'; ?>">
+            <i class="nav-icon fas fa-users"></i>
             <p>
               Marketing
             </p>
@@ -90,10 +62,37 @@
         </li>
 
         <li v-if="currentSector.code == 'operaciones' || currentSector.code == 'all'" class="nav-item">
-          <a href="operaciones.php" class="nav-link">
-            <i class="nav-icon far fa-image"></i>
+          <a href="operaciones.php" class="nav-link <?php if ($current === 'operaciones') echo ' active'; ?>">
+            <i class="nav-icon fas fa-users"></i>
             <p>
               Operaciones
+            </p>
+          </a>
+        </li>
+
+        <li v-if="currentSector.code == 'all'" class="nav-item">
+          <a href="listado-newsletters.php" class="nav-link <?php if ($current === 'newsletters') echo ' active'; ?>">
+            <i class="nav-icon fas fa-list"></i>
+            <p>
+              Listado de <br>Newsletters
+            </p>
+          </a>
+        </li>
+
+        <li v-if="currentSector.code == 'administracion-finanzas' || currentSector.code == 'all'" class="nav-item">
+          <a href="carga-tabla.php" class="nav-link <?php if ($current === 'tabla') echo ' active'; ?>">
+            <i class="nav-icon fas fa-table"></i>
+            <p>
+              Carga de Tabla
+            </p>
+          </a>
+        </li>
+
+        <li v-if="currentSector.code == 'all'" class="nav-item">
+          <a href="calendarios.php" class="nav-link <?php if ($current === 'calendario') echo ' active'; ?>">
+            <i class="nav-icon fas fa-calendar-alt"></i>
+            <p>
+              Calendarios
             </p>
           </a>
         </li>

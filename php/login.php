@@ -31,7 +31,7 @@
 
 		if ($emailBdd['rol'] === 'admin') {
 			createVarialbesSession($emailBdd);
-			header('Location: carga-tabla.php');
+			header('Location: listado-newsletters.php');
 		} else {
 			createVarialbesSession($emailBdd);
 			header('Location: '.$emailBdd['code'].'.php');

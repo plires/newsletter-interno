@@ -48,6 +48,8 @@
 <body class="hold-transition sidebar-mini layout-fixed">
   <div id="app" class="wrapper carga_tabla administracion_finanzas">
 
+    <?php $current = 'tabla'; ?>
+
     <!-- Notificacion de exito -->
     <?php require('includes/notificationSuccess.inc.php'); ?>
     <!-- Notificacion de exito end -->

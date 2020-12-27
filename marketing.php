@@ -47,6 +47,8 @@
 <body class="hold-transition sidebar-mini layout-fixed">
   <div id="app" class="wrapper marketing">
 
+    <?php $current = 'marketing'; ?>
+
     <!-- Notificacion de exito -->
     <?php require('includes/notificationSuccess.inc.php'); ?>
     <!-- Notificacion de exito end -->

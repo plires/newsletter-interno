@@ -15,6 +15,10 @@
 
  .pagination { flex-wrap: wrap; }
 
+ .nav-link { display: flex; align-items: center; }
+ .user-panel, .user-panel .info { white-space: normal; }
+ aside .active { background-color: #007bff!important; color: white!important; box-shadow: none!important; font-weight: 700!important; }
+
  .card { width: 100%; }
  .note-float-left { margin-right: 10px; }
  .note-float-right { margin-left: 10px; }

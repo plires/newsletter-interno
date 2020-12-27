@@ -45,6 +45,8 @@
 <body class="hold-transition sidebar-mini layout-fixed">
   <div id="app" class="wrapper listado">
 
+    <?php $current = 'newsletters'; ?>
+
     <!-- Notificacion de exito -->
     <?php require('includes/notificationSuccess.inc.php'); ?>
     <!-- Notificacion de exito end -->

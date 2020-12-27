@@ -49,6 +49,8 @@
 <body class="hold-transition sidebar-mini layout-fixed">
   <div id="app" class="wrapper calendarios">
 
+    <?php $current = 'calendario'; ?>
+
     <!-- Notificacion de exito -->
     <?php require('includes/notificationSuccess.inc.php'); ?>
     <!-- Notificacion de exito end -->
