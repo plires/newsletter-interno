@@ -23,6 +23,13 @@
  .note-float-left { margin-right: 10px; }
  .note-float-right { margin-left: 10px; }
 
+ .transition{
+	  -webkit-transition: all ease-in-out .3s; /* Safari */
+	  transition: all ease-in-out .3s;
+	}
+
+	.libre { font-size: 12px; }
+
 @media (min-width: 576px) {
 }
 @media (min-width: 768px) {

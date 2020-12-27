@@ -51,10 +51,6 @@
     <?php require('includes/notificationSuccess.inc.php'); ?>
     <!-- Notificacion de exito end -->
 
-    <!-- Nav -->
-    <?php require('includes/admin/nav.inc'); ?>
-    <!-- Nav end -->
-
     <!-- Aside -->
     <?php require('includes/admin/aside.inc.php'); ?>
     <!-- Aside end -->
