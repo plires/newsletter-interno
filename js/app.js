@@ -20,7 +20,9 @@ let app = new Vue({
       fileInvalid: '',
       tableFile: '',
       idCalendarToDelete: '',
+      idNewsletterToDelete: '',
       calendarEditMode: false,
+      newsletterEditMode: false,
       errors: []
     }
   },
@@ -322,6 +324,83 @@ let app = new Vue({
 
     },
 
+    validInputsFromNewsletter(action){
+
+      this.errors = [];
+
+      let inputs = this.getInputsFromFormNewsletter()
+
+      if (!inputs[0]) {
+        if (!this.isValidDate(inputs[0])) {
+          this.errors.push('Debe ingresar un nombre/título');
+        }
+      }
+
+      if (!inputs[1]) {
+        if (!this.validateFormatTime(inputs[1])) {
+          this.errors.push('Debe ingresar un mes');
+        }
+      }
+
+      if (!inputs[2]) {
+        if (!this.validateFormatTime(inputs[2])) {
+          this.errors.push('Debe ingresar un año');
+        }
+      }
+      this.newslettersCurrentYear.forEach( function(element) {
+
+        if ( element.month === parseInt(inputs[1]) && element.year === parseInt(inputs[2])) {
+          if (app.newsletterEditMode === false) {
+            app.errors.push('Ya existe un newsletter para este mes y año. Para remplazarlo debe eliminarlo previamente.');
+          }
+        }
+
+      });
+
+      if (this.errors.length === 0) {
+        this.alterNewsletter(action)
+      }
+
+    },
+
+    alterNewsletter(action){
+      loader();
+
+      if (app.newsletterEditMode) {
+        action = 'edit'
+        var id = $('#newsletterId').val()
+      } else {
+        var id = 0;
+      }
+
+      let url = root + 'php/newsletter.php';
+
+      let inputs = this.getInputsFromFormNewsletter()
+
+      $.ajax({
+        url,
+        data: {
+          'id': id,
+          'action': action,
+          'name': inputs[0],
+          'month': inputs[1],
+          'year': inputs[2],
+        },
+        type: "POST",
+        success: function(response) {
+          app.getNewslettersCurrentYear()
+          $('#modalNewNewsletter').modal('hide')
+          app.resetInputsFromFormNewsletter();
+        },
+        error: function() {
+          alert('Ocurrió un error, intente mas tarde por favor.');
+        }
+      });
+
+      $('#loader').fadeOut(500);
+
+    },
+
     alterCalendar(currentNewsletter, action, summerNoteID){
       loader();
 
@@ -412,6 +491,19 @@ let app = new Vue({
     },
 
     /**
+    * Funcion para obtener los valores de los inputs del formulario de Calendario
+    */
+    getInputsFromFormNewsletter(){
+      
+      let inputName = $('#name')[0].value
+      let inputMonth = $('#selectMonth')[0].value
+      let inputYear = $('#selectYear')[0].value
+
+      return [inputName, inputMonth, inputYear]
+
+    },
+
+    /**
     * Funcion para setear los valores de los inputs del formulario de Calendario
     */
     setInputsFromDateCalendar(event){
@@ -445,6 +537,62 @@ let app = new Vue({
     },
 
     /**
+    * Funcion para resetear los valores de los inputs del formulario de alta del newsletter
+    */
+    resetInputsFromFormNewsletter(){
+      $('#name')[0].value = '';
+      $('#selectMonth')[0].value = '';
+      $('#selectYear')[0].value = '';
+    },
+
+    /**
+    * Funcion para setear el id del newsletter que sera eliminado en caso que se 
+    * confirme la accion en el modal de confirmacion posteriormente
+    */
+    setIdNewsletterToDelete(id){
+      console.log(id)
+      this.idNewsletterToDelete = id; 
+    },
+
+    /**
+    * Funcion para cancelar la eliminacion de un newsletter
+    */
+    cancelDeleteNewsletter(){
+      this.idNewsletterToDelete = ''; 
+    },
+
+    /**
+    * Funcion para eliminar un newsletter
+    */
+    deleteNewsletter(id){
+
+      loader();
+
+      let url = root + 'php/newsletter.php';
+
+      $.ajax({
+        type: 'POST',
+        url: url,
+        data: { 
+          'id': id,
+          'action': 'delete'
+        },
+        success: function(response) {
+          if (response == 'true') {
+            app.idNewsletterToDelete = '';
+            $('#modalDelNewsletter').modal('hide')
+            app.getNewslettersCurrentYear()
+          } else {
+            alert('Hubo un error, intente nuevamente.');
+          }
+        }
+
+      });
+
+      $('#loader').fadeOut(500);
+    },
+
+    /**
     * Funcion para setear el id del evento de calendario que sera eliminado en caso que se 
     * confirme la accion en el modal de confirmacion posteriormente
     */
@@ -452,7 +600,7 @@ let app = new Vue({
       this.idCalendarToDelete = id; 
     },
 
-     /**
+    /**
     * Funcion para cancelar la eliminacion de un evento calendario
     */
     cancelDeleteCalendar(){
@@ -490,6 +638,8 @@ let app = new Vue({
 
       $('#loader').fadeOut(500);
     },
+
+
 
     /**
     * Funcion que guarda la imagen en el servidor
@@ -587,6 +737,7 @@ let app = new Vue({
     /**
     * Funcion para editar un evento del calendario en curso
     * @param int {id} - id del evento del calendario a editar
+    * @param string {action} - nombre de la accion (add/edit/delete)
     */
     calendarEventToEdit(id, action) {
 
@@ -600,6 +751,58 @@ let app = new Vue({
 
       this.setInputsFromDateCalendar(event)
       
+    },
+
+    /**
+    * Funcion para editar un newsletter
+    * @param int {id} - id del newsletter a editar
+    * @param string {action} - nombre de la accion (add/edit/delete)
+    */
+    newsletterToEdit(id, action) {
+
+      this.newsletterEditMode = true
+
+      function getNewsletter(element) { 
+        return element.id === id;
+      }
+
+      let newsletter = this.newslettersCurrentYear.filter(getNewsletter);
+
+      $('#newsletterId').val(newsletter[0].id);
+      $('#name')[0].value = newsletter[0].name;
+      $('#selectMonth').val(newsletter[0].month);
+      $('#selectYear').val(newsletter[0].year);
+      
+    },
+
+    changeStatus: function(id, status) {
+
+      let url = root + 'php/changeStatusNewsletter.php';
+
+      loader();
+      $.ajax({
+        type: 'POST',
+        url: url,
+        data: {id: id, status: status},
+        success: function(response) {
+          if (response) {
+            $('#loader').fadeOut(500);
+            // app.messages.push('Cambió el estado del producto.');
+            app.getNewslettersCurrentYear();
+            // setTimeout(function() {
+            //   $("#messages").fadeOut("slow", function() {
+            //     app.messages = [];
+            //   });
+            // }, 1500);
+          } else {
+            alert('Hubo un error, intente nuevamente');
+          }
+        },
+        fail: function() {
+          $('#loader').fadeOut(500);
+          alert('Hubo un error, intente nuevamente.');
+        }
+      });
     }
 
   },
@@ -651,6 +854,12 @@ function loader() {
 $('#modalNewEvent').on('hide.bs.modal', function () {
   app.resetInputsFromDateCalendar();
   app.calendarEditMode = false;
+  app.errors = [];
+})
+
+$('#modalNewNewsletter').on('hide.bs.modal', function () {
+  // app.resetInputsFromDateCalendar();
+  app.newsletterEditMode = false;
   app.errors = [];
 })
 

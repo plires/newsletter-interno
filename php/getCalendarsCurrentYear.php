@@ -13,7 +13,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 $date = Carbon::now();
 $currentYear = $date->year;
 
-$sql = "SELECT * FROM calendars where year = '$currentYear' ORDER BY month ASC";
+$sql = "SELECT * FROM calendars";
 $stmt = $db->prepare($sql);
 $stmt->execute();
 $calendars = $stmt->fetchAll(PDO::FETCH_ASSOC);

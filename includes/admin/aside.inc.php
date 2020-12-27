@@ -44,6 +44,15 @@
           </a>
         </li>
 
+        <li v-if="currentSector.code == 'all'" class="nav-item">
+          <a href="listado-newsletters.php" class="nav-link">
+            <i class="nav-icon far fa-image"></i>
+            <p>
+              Listado de <br>Newsletters
+            </p>
+          </a>
+        </li>
+
         <li v-if="currentSector.code == 'gerencia-general' || currentSector.code == 'all'" class="nav-item">
           <a href="gerencia-general.php" class="nav-link">
             <i class="nav-icon far fa-image"></i>
@@ -57,7 +66,7 @@
           <a href="gerencia-talento.php" class="nav-link">
             <i class="nav-icon far fa-image"></i>
             <p>
-              Gerencia de Talento y Negocios
+              Gerencia de Talento <br>y Negocios
             </p>
           </a>
         </li>
@@ -66,7 +75,7 @@
           <a href="administracion-finanzas.php" class="nav-link">
             <i class="nav-icon far fa-image"></i>
             <p>
-              Administracion y Finanzas
+              Administracion y <br>Finanzas
             </p>
           </a>
         </li>

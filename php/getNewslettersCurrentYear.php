@@ -13,7 +13,8 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 $date = Carbon::now();
 $currentYear = $date->year;
 
-$sql = "SELECT * FROM newsletters where year = '$currentYear' ORDER BY month ASC";
+// $sql = "SELECT * FROM newsletters where year = '$currentYear' ORDER BY month ASC";
+$sql = "SELECT * FROM newsletters ORDER BY year ASC, month ASC LIMIT 15";
 $stmt = $db->prepare($sql);
 $stmt->execute();
 $newsletters = $stmt->fetchAll(PDO::FETCH_ASSOC);
