@@ -112,6 +112,10 @@
                                 <i class="fas fa-trash-alt"></i>
                               </button>
 
+                              <button title="Enviar Mail de aviso a todos los sectores" type="button" class="btn btn-default btn-flat" @click="newsletterToSend(newsletter.id)" data-toggle="modal" data-target="#modalSendEmails">
+                                <i class="far fa-envelope"></i>
+                              </button>
+
                             </div>
                           </td>
 
@@ -157,6 +161,10 @@
     <!-- Footer -->
     <?php require('includes/admin/footer.inc'); ?>
     <!-- Footer end -->
+
+    <!-- Modal Envio de emails a sectores -->
+    <?php require('includes/sendEmailsModal.inc.php'); ?>
+    <!-- Modal Envio de emails a sectores end -->
 
     <!-- Modal formulario Newsletter -->
     <?php require('includes/newsletterModal.inc.php'); ?>

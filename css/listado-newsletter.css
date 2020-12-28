@@ -1,0 +1,16 @@
+/* Listado Newsletters */
+
+.listado .badge { font-size: 1rem!important; margin-left: 10px!important; }
+.listado .alert { display: none; }
+
+@media (min-width: 576px) {
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+
+}
+@media (min-width: 1140px) {
+
+}
+/* Listado Newsletters end */

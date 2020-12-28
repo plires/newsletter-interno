@@ -550,7 +550,6 @@ let app = new Vue({
     * confirme la accion en el modal de confirmacion posteriormente
     */
     setIdNewsletterToDelete(id){
-      console.log(id)
       this.idNewsletterToDelete = id; 
     },
 
@@ -750,6 +749,60 @@ let app = new Vue({
       let event = this.currentCalendarEvents.filter(getCalendar);
 
       this.setInputsFromDateCalendar(event)
+      
+    },
+
+    sendEmailsToAllSectors() {
+      loader();
+
+      let id = $('#newsletterId').val();
+
+      axios.post(root + 'php/sendEmailsToAllSectors.php', {
+          id: id
+      }).then(response => {
+
+        $('#contentNotificationes').css('display','inline-block');
+        $('.alert').css('display','flex');
+        $('.alert').css('flex-direction','column');
+
+        if (response.data) {
+
+          $('.alert').removeClass('alert-danger');
+          $('.alert').addClass('alert-success');
+          var message = `<p>Se enviaron los avisos a todas las casillas de email</p>`
+        } else {
+
+          $('.alert').removeClass('alert-success');
+          $('.alert').addClass('alert-danger');
+          var message = `<p>Error al enviar los avisos. Intente nuevamente</p>`
+
+        }
+        
+        $('#successSend').html(message);
+        $('#loader').fadeOut(500);
+      }).catch(e => {
+          alert(e);
+      });
+    },
+
+    /**
+    * Funcion para enviar mails a todos los sectores avisando que hay un nuevo newsletter para editar / completar
+    * @param int {id} - id del newsletter a editar
+    * @param string {action} - nombre de la accion (add/edit/delete)
+    */
+    newsletterToSend(id) {
+
+      function getNewsletter(element) { 
+        return element.id === id;
+      }
+
+      let newsletter = this.newslettersCurrentYear.filter(getNewsletter);
+
+      $('#newsletterId').val(newsletter[0].id);
+      $('#title').text(newsletter[0].name);
+      $('#month').text(newsletter[0].name_month);
+      $('#year').text(newsletter[0].year);
+      $('#contentNotificationes').css('display','none');
       
     },
 

@@ -15,18 +15,13 @@ define('DB_PASS', 'root');
 //////////////////////////////
 ///Valores de Envio de emails
 //////////////////////////////
-// define('SMTP', 'smtp.dellabitta.com.ar');
-// define('EMAIL_SENDER', 'presupuestos@dellabitta.com.ar');
-// define('EMAIL_SENDER_SHOW', 'presupuestos@dellabitta.com.ar');
-// define('NAME_SENDER_SHOW', 'Ascensores Dellabitta');
-// define('EMAIL_RECIPIENT', 'presupuestos@dellabitta.com.ar');
-// define('EMAIL_BCC', 'pablo@librecomunicacion.net');
-// define('EMAIL_PASS', 'g4jNAwBwjGA3');
-// define('EMAIL_PORT', 587);
-// define('EMAIL_NAME', 'Ascensores Dellabitta');
-// define('EMAIL_SUBJECT', 'Gracias por tu contacto');
-// define('EMAIL_CHARSET', 'utf-8');
-// define('EMAIL_ENCODING', 'quoted­printable');
-
+define('SMTP', 'smtp.librecomunicacion.net');
+define('USER_SMTP', 'pruebas@librecomunicacion.net');
+define('PASS_SMTP', 'Perezzs$7478');
+define('EMAIL_SENDER_SHOW', 'pruebas@librecomunicacion.net');
+define('NAME_SENDER_SHOW', 'Vistage Newsletter');
+define('EMAIL_PORT', 587);
+define('EMAIL_SUBJECT', 'Nuevo Newsletter Vistage para completar');
+define('EMAIL_CHARSET', 'utf-8');
 
 ?>
