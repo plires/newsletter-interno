@@ -3,6 +3,9 @@
 .login .content-wrapper { margin: 0!important; display: flex; min-height: 100vh; justify-content: center; align-items: center; }
 .login .content-wrapper .content { min-width: 35%; }
 
+.reset .jumbotron { width: 100%; }
+.reset .col-md-6 { display: flex; justify-content: center; align-items: center; height: 100vh; }
+
 @media (min-width: 576px) {
 }
 @media (min-width: 768px) {
