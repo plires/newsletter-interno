@@ -47,10 +47,6 @@
 
     <?php $current = 'newsletters'; ?>
 
-    <!-- Notificacion de exito -->
-    <?php require('includes/notificationSuccess.inc.php'); ?>
-    <!-- Notificacion de exito end -->
-
     <!-- Aside -->
     <?php require('includes/admin/aside.inc.php'); ?>
     <!-- Aside end -->
@@ -101,7 +97,7 @@
                           <td>{{ newsletter.name }}</td>
                           <td>{{ newsletter.name_month }}</td>
                           <td>{{ newsletter.year }}</td>
-                          <td class="text-center">
+                          <td class="text-left">
                             <div class="btn-group">
 
                               <button title="Editar" type="button" class="btn btn-default btn-flat" @click="newsletterToEdit(newsletter.id, 'edit')" data-toggle="modal" data-target="#modalNewNewsletter">
@@ -114,6 +110,10 @@
 
                               <button title="Enviar Mail de aviso a todos los sectores" type="button" class="btn btn-default btn-flat" @click="newsletterToSend(newsletter.id)" data-toggle="modal" data-target="#modalSendEmails">
                                 <i class="far fa-envelope"></i>
+                              </button>
+
+                              <button v-if="newsletter.url != 0" title="Obtener Link del Newsletter para Compartir" type="button" class="btn btn-default btn-flat" @click="shareUrlNewsletter(newsletter.id)" data-toggle="modal" data-target="#modalShareUrlNewsletter">
+                                <i class="fas fa-share-alt"></i>
                               </button>
 
                             </div>
@@ -160,7 +160,10 @@
     
     <!-- Footer -->
     <?php require('includes/admin/footer.inc'); ?>
-    <!-- Footer end -->
+
+    <!-- Compartir url newsletter -->
+    <?php require('includes/modalShareUrlNewsletter.inc.php'); ?>
+    <!-- Compartir url newsletter end -->
 
     <!-- Modal Envio de emails a sectores -->
     <?php require('includes/sendEmailsModal.inc.php'); ?>

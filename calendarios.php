@@ -51,10 +51,6 @@
 
     <?php $current = 'calendario'; ?>
 
-    <!-- Notificacion de exito -->
-    <?php require('includes/notificationSuccess.inc.php'); ?>
-    <!-- Notificacion de exito end -->
-
     <!-- Aside -->
     <?php require('includes/admin/aside.inc.php'); ?>
     <!-- Aside end -->

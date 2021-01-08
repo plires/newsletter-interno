@@ -35,9 +35,7 @@
 		        
 		  $save = $stmt->execute();
 
-		  var_dump($save);
-			
-			echo $save;
+		  echo json_encode($save);
 			break;
 
 			case 'edit':
@@ -58,7 +56,7 @@
 		        
 		  $save = $stmt->execute();
 
-			echo $save;
+			echo json_encode($save);
 			break;
 
 		case 'delete':
@@ -67,9 +65,9 @@
 		        
 		  $sql = "DELETE FROM newsletters WHERE id='$id'";
 		  $stmt = $db->prepare($sql);
-		  $result = $stmt->execute();
+		  $save = $stmt->execute();
 
-		  echo json_encode($result);
+		  echo json_encode($save);
 			break;
 	}
 

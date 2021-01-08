@@ -58,6 +58,7 @@
                 <label for="selectYear">Año</label>
                 <select class="form-control" id="selectYear">
                   <?php foreach ($years as $key => $value): ?>
+                    <?php var_dump($value) ?>
                     <option value="<?= $value ?>"><?= $value ?></option>
                   <?php endforeach ?>
                 </select>

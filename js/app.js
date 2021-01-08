@@ -21,9 +21,10 @@ let app = new Vue({
       tableFile: '',
       idCalendarToDelete: '',
       idNewsletterToDelete: '',
+      urlNewsletterToshare: '',
       calendarEditMode: false,
       newsletterEditMode: false,
-      errors: []
+      errors: [],
     }
   },
   mounted() {
@@ -157,7 +158,6 @@ let app = new Vue({
 			});
 
       this.currentNewsletter = currentNewsletter[0]; // Asigno el newsletter activo
-      // $('.foo').css('display','flex');alert('asd')
     },
 
     /**
@@ -219,7 +219,8 @@ let app = new Vue({
     },
 
     /**
-    * Funcion para guardar los datos en la base de datos y activa o deshabilita elementos en funcion del exito o error de la operacion
+    * Funcion para guardar los datos en la base de datos y activa o deshabilita 
+    * elementos en funcion del exito o error de la operacion
     * @param currentNewsletter {Object} - Objeto con el newsletter a guardar
     * @param field {string} - nombre del summernote que se esta editando
     * @param column {string} - nombre del campo de la base de datos a editar
@@ -235,14 +236,13 @@ let app = new Vue({
         if (result) {
           app.getNewslettersCurrentYear()
           $('.summernote').summernote('destroy');
-          // $('#'+field).css('display','none');
-          $('#notifications').modal('show')
+          createToasts('bg-success', 'Newsletter', 'Accion', 'Evento guardado con éxito.')
           $('#'+column).css('display','none'); // Se oculta  el summernote editado
 
           $('#'+sectionPreview).css('display','flex'); // Se muestra el preview
 
         } else {
-          alert('Hubo un error al guardar el dato.')
+          createToasts('bg-danger', 'Newsletter', 'Accion', 'Hubo un error al guardar el dato.')
           app.getNewslettersCurrentYear()
         }
       });
@@ -388,12 +388,17 @@ let app = new Vue({
         },
         type: "POST",
         success: function(response) {
-          app.getNewslettersCurrentYear()
-          $('#modalNewNewsletter').modal('hide')
-          app.resetInputsFromFormNewsletter();
+          if (response == 'true') {
+            app.getNewslettersCurrentYear()
+            $('#modalNewNewsletter').modal('hide')
+            createToasts('bg-success', 'Newsletter', 'Accion', 'Newsletter agregado / editado con éxito.')
+            app.resetInputsFromFormNewsletter();
+          } else {
+            createToasts('bg-danger', 'Newsletter', 'Accion', 'Ocurrió un error, intente mas tarde por favor.')
+          }
         },
         error: function() {
-          alert('Ocurrió un error, intente mas tarde por favor.');
+          createToasts('bg-danger', 'Newsletter', 'Accion', 'Ocurrió un error, intente mas tarde por favor.')
         }
       });
 
@@ -422,13 +427,18 @@ let app = new Vue({
         },
         type: "POST",
         success: function(response) {
-          app.getCalendarsCurrentYear()
-          $('#modalNewEvent').modal('hide')
-          $('.summernote').summernote('destroy');
-          app.resetInputsFromDateCalendar();
+          if (response) {
+            app.getCalendarsCurrentYear()
+            $('#modalNewEvent').modal('hide')
+            $('.summernote').summernote('destroy');
+            createToasts('bg-success', 'Newsletter', 'Accion', 'El evento se agregó con éxito')
+            app.resetInputsFromDateCalendar();
+          } else {
+            createToasts('bg-danger', 'Evento', 'Accion', 'Ocurrió un error, intente mas tarde por favor.')
+          }
         },
         error: function() {
-          alert('Ocurrió un error, intente mas tarde por favor.');
+          createToasts('bg-danger', 'Evento', 'Accion', 'Ocurrió un error, intente mas tarde por favor.')
         }
       });
 
@@ -580,9 +590,10 @@ let app = new Vue({
           if (response == 'true') {
             app.idNewsletterToDelete = '';
             $('#modalDelNewsletter').modal('hide')
+            createToasts('bg-success', 'Newsletter', 'Accion', 'El newsletter se eliminó con éxito')
             app.getNewslettersCurrentYear()
           } else {
-            alert('Hubo un error, intente nuevamente.');
+            createToasts('bg-danger', 'Newsletter', 'Accion', 'Hubo un error, intente nuevamente.')
           }
         }
 
@@ -629,7 +640,7 @@ let app = new Vue({
             app.getCalendarsCurrentYear()
             app.resetInputsFromDateCalendar()
           } else {
-            alert('Hubo un error, intente nuevamente.');
+            createToasts('bg-danger', 'Newsletter', 'Accion', 'Hubo un error, intente nuevamente.')
           }
         }
 
@@ -695,9 +706,10 @@ let app = new Vue({
             $('.custom-file-label').text('Elegir Tabla');
             $('.custom-file-label').css('background-color','transparent');
             $('.custom-file-label').css('color','#212529');
+            createToasts('bg-success', 'Tabla', 'Accion', 'La tabla se subio correctamente')
             app.getTablesCurrentYear()
           } else {
-            alert('Hubo un error al cargar la tabla. Por favor intente nuevamente')
+            createToasts('bg-danger', 'Tabla', 'Accion', 'Hubo un error al cargar la tabla. Por favor intente nuevamente')
           }
         }
       });
@@ -824,8 +836,29 @@ let app = new Vue({
       $('#newsletterId').val(newsletter[0].id);
       $('#name')[0].value = newsletter[0].name;
       $('#selectMonth').val(newsletter[0].month);
+      
+      let x = document.getElementById("selectYear");
+      let option = document.createElement("option");
+      option.text = newsletter[0].year;
+      x.add(option);
+
       $('#selectYear').val(newsletter[0].year);
       
+    },
+
+    /**
+    * Funcion para compartir un newsletter
+    * @param int {id} - id del newsletter a compartir
+    */
+    shareUrlNewsletter(id) {
+
+      function getNewsletter(element) { 
+        return element.id === id;
+      }
+
+      let newsletter = this.newslettersCurrentYear.filter(getNewsletter);
+      this.urlNewsletterToshare = newsletter[0].url
+
     },
 
     changeStatus: function(id, status) {
@@ -838,22 +871,17 @@ let app = new Vue({
         url: url,
         data: {id: id, status: status},
         success: function(response) {
-          if (response) {
-            $('#loader').fadeOut(500);
-            // app.messages.push('Cambió el estado del producto.');
+          if (response == 'true') {
+            createToasts('bg-success', 'Newsletter', 'Estado', 'El newsletter cambió su estado con éxito')  
             app.getNewslettersCurrentYear();
-            // setTimeout(function() {
-            //   $("#messages").fadeOut("slow", function() {
-            //     app.messages = [];
-            //   });
-            // }, 1500);
           } else {
-            alert('Hubo un error, intente nuevamente');
+            createToasts('bg-danger', 'Newsletter', 'Accion', 'Hubo un error, intente nuevamente.')
+            $('#loader').fadeOut(500);
           }
         },
         fail: function() {
           $('#loader').fadeOut(500);
-          alert('Hubo un error, intente nuevamente.');
+          createToasts('bg-danger', 'Newsletter', 'Accion', 'Hubo un error, intente nuevamente.')
         }
       });
     }
@@ -916,7 +944,15 @@ $('#modalNewNewsletter').on('hide.bs.modal', function () {
   app.errors = [];
 })
 
-
-
-
-
+function createToasts(clase, title, subtitle, body) {
+  $('#toastsContainerTopRight').show();
+  $(document).Toasts('create', {
+    class: clase,
+    title: title,
+    subtitle: subtitle,
+    autohide: true,
+    autoremove: true,
+    delay: 1500,
+    body: body
+  })
+}

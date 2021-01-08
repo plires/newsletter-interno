@@ -4,6 +4,8 @@
 ///Valores Server
 ////////////////////////
 define ('SITE_ROOT', realpath(dirname(__FILE__) . '/../') );
+define ('LOCAL_FOLDER', 'vistage/propuestas/newsletter-dinamico');
+define ('PATH_ROOT', (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/' . LOCAL_FOLDER );
 
 ////////////////////////
 ///Valores de DB Local
