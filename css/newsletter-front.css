@@ -27,6 +27,30 @@ h2 {
 
 ul { padding: 0; padding-left: 15px; }
 
+a { 
+	color: var(--secondary-color); 
+	-webkit-transition: all ease-in-out .3s; /* Safari */
+  transition: all ease-in-out .3s; 
+}
+a:hover { text-decoration: none; color: var(--primary-color); }
+
+/* Videos */
+p iframe,
+div iframe { width: 100%!important; min-height: 300px!important; }
+/* Videos end */
+
+.blockquote {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+blockquote {
+    background-color: #fff;
+    border-left: .7rem solid var(--secondary-color);
+    margin: 1.5em .7rem;
+        margin-bottom: 1.5em;
+    padding: .5em .7rem;
+}
+
 .note-float-right { padding-left: 30px!important; }
 .note-float-left { padding-right: 30px!important; }
 
@@ -202,6 +226,11 @@ header h2 span { font-family: BreeSerif; font-weight: 400; }
 	header { min-height: 500px;	}
 	header h2 { font-size: 1.5rem; }
 	/* Header end */
+
+	/* Videos */
+	p iframe,
+	div iframe { min-height: 375px!important; }
+	/* Videos end */
 }
 @media (min-width: 992px) {
 	.tabla h2, .calendario h2, .gerencia_general h2,
@@ -215,12 +244,22 @@ header h2 span { font-family: BreeSerif; font-weight: 400; }
 	.calendario .card { min-height: 300px!important; }
 	/* Calendario end */
 
+	/* Videos */
+	p iframe,
+	div iframe { min-height: 520px!important; }
+	/* Videos end */
+
 }
 @media (min-width: 1140px) {
 	/* Header */
 	header { min-height: 800px;	}
 	header h2 { font-size: 2.25rem; padding: 60px 15px 10px 15px; }
 	/* Header end */
+
+	/* Videos */
+	p iframe,
+	div iframe { min-height: 620px!important; }
+	/* Videos end */
 
 	}
 
