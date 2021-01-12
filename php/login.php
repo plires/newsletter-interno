@@ -28,10 +28,15 @@
 
 	if ($emailBdd) {
 
+
 		if ($emailBdd['rol'] === 'admin') {
+			// echo "true";
+			// var_dump($emailBdd);exit;
 			createVarialbesSession($emailBdd);
 			header('Location: listado-newsletters.php');
 		} else {
+			// echo "flase";
+			// var_dump($emailBdd);exit;
 			createVarialbesSession($emailBdd);
 			header('Location: '.$emailBdd['code'].'.php');
 		}

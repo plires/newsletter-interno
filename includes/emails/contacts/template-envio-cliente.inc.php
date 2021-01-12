@@ -50,7 +50,7 @@ $body='
 
       <tr>
           <td align="center" valign="top">
-            <h3 style="font-family: Arial; color: #093c5c">Haga click  <a href="'.PATH_ROOT.'">aquí</a> para completar la información de su sector.</h3>
+            <h3 style="font-family: Arial; color: #093c5c">Haga click  <a href="'.PATH_ROOT.'/listado-newsletters.php">aquí</a> para completar la información de su sector.</h3>
           </td>
       </tr>
 
