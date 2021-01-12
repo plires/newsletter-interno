@@ -12,7 +12,7 @@
 		$stmt->execute();
 		$newsletter = $stmt->fetch(PDO::FETCH_ASSOC);
 
-		if (!$newsletter) {
+		if (!$newsletter || $newsletter['execute'] == 0) {
   		header('location: 404.php');
 		}
 

@@ -203,6 +203,10 @@ header h2 span { font-family: BreeSerif; font-weight: 400; }
 .libre a:hover { color: white; text-decoration: none; }
 /* Footer end*/
 
+/* 404 */
+.not_found .col-md-12 { min-height: 80vh; text-align: center; display: flex; justify-content: center; align-items: center; } 
+/* 404 end */
+
 
 @media (min-width: 576px) {
 	/* Header */
