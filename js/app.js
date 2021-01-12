@@ -1,4 +1,5 @@
 const root = 'http://localhost:8888/vistage/propuestas/newsletter-dinamico/';
+// const root = 'https://vistage.com.ar/newsletter-dinamico/';
 
 let app = new Vue({
   el: '#app',
@@ -258,6 +259,8 @@ let app = new Vue({
     * @param column {string} - nombre del campo de la base de datos a editar
     */
     updateNewsletter: function(idNewsletter, field, column ) {
+      loader();
+
       let url = root + 'php/updateNewsletter.php';
 
       let fieldSector = $('#'+field).summernote('code');
@@ -280,9 +283,17 @@ let app = new Vue({
         });
       });
 
+      $('#loader').fadeOut(500);
+
       return promise;
     },
 
+    /**
+    * Funcion para validar inputs de eventos de calendario
+    * @param currentNewsletter {object} - newsletter actual
+    * @param action {string} - accion (add/edit/delete)
+    * @param column {string} - nombre del ID del summerNote a editar
+    */
     validInputsFromCalendar(currentNewsletter, action, summerNoteID){
 
       this.errors = [];
@@ -324,6 +335,10 @@ let app = new Vue({
 
     },
 
+    /**
+    * Funcion para validar inputs del formulario de newsletters
+    * @param action {string} - accion (add/edit/delete)
+    */
     validInputsFromNewsletter(action){
 
       this.errors = [];
@@ -363,6 +378,10 @@ let app = new Vue({
 
     },
 
+    /**
+    * Funcion para editar un newsletter
+    * @param action {string} - accion (add/edit/delete)
+    */
     alterNewsletter(action){
       loader();
 
@@ -406,6 +425,12 @@ let app = new Vue({
 
     },
 
+    /**
+    * Funcion para editar un evento calendario
+    * @param currentNewsletter {object} - newsletter actual
+    * @param action {string} - accion (add/edit/delete)
+    * @param summerNoteID {string} - nombre del ID del summerNote a editar
+    */
     alterCalendar(currentNewsletter, action, summerNoteID){
       loader();
 
@@ -452,28 +477,28 @@ let app = new Vue({
     */
     isValidDate(dateString){
 
-        // First check for the pattern
-        if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString))
-            return false;
+      // First check for the pattern
+      if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString))
+          return false;
 
-        // Parse the date parts to integers
-        var parts = dateString.split("/");
-        var day = parseInt(parts[1], 10);
-        var month = parseInt(parts[0], 10);
-        var year = parseInt(parts[2], 10);
+      // Parse the date parts to integers
+      var parts = dateString.split("/");
+      var day = parseInt(parts[1], 10);
+      var month = parseInt(parts[0], 10);
+      var year = parseInt(parts[2], 10);
 
-        // Check the ranges of month and year
-        if(year < 1000 || year > 3000 || month == 0 || month > 12)
-            return false;
+      // Check the ranges of month and year
+      if(year < 1000 || year > 3000 || month == 0 || month > 12)
+          return false;
 
-        var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+      var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
-        // Adjust for leap years
-        if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
-            monthLength[1] = 29;
+      // Adjust for leap years
+      if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+          monthLength[1] = 29;
 
-        // Check the range of the day
-        return day > 0 && day <= monthLength[month - 1];
+      // Check the range of the day
+      return day > 0 && day <= monthLength[month - 1];
     },
 
     /**
@@ -517,7 +542,6 @@ let app = new Vue({
     * Funcion para setear los valores de los inputs del formulario de Calendario
     */
     setInputsFromDateCalendar(event){
-
 
       this.initSummerNote('comment_calendar', 'description', null);
 
@@ -649,14 +673,13 @@ let app = new Vue({
       $('#loader').fadeOut(500);
     },
 
-
-
     /**
     * Funcion que guarda la imagen en el servidor
     * @param file {File} - Datos de la imagen subida (name, size, tyoe, etc)
     * @param string {editorName} - Nombre del summernote que se esta editando
     */
     sendFile(file,editorName) {
+      loader();
       data = new FormData();
       data.append("file", file);
       $.ajax({
@@ -671,6 +694,7 @@ let app = new Vue({
           $('#'+editorName).summernote("insertNode", image[0]);
         }
       });
+      $('#loader').fadeOut(500);
     },
 
     /**
@@ -681,8 +705,14 @@ let app = new Vue({
       $('#'+sectionIn).css('display','flex');
     },
 
+    /**
+    * Funcion que guarda la tabla en base de datosw
+    * @param evento {e} - datos del evento
+    */
     submitUploadTable:function(e){
       e.preventDefault();
+
+      loader();
 
       let formData = new FormData();
       formData.append('file', this.tableFile);
@@ -713,6 +743,8 @@ let app = new Vue({
           }
         }
       });
+
+      $('#loader').fadeOut(500);
 
     },
 
@@ -764,6 +796,9 @@ let app = new Vue({
       
     },
 
+    /**
+    * Funcion para enviar mails a todos los sectores avisando que hay un nuevo newsletter para editar / completar
+    */
     sendEmailsToAllSectors() {
       loader();
 
@@ -798,9 +833,8 @@ let app = new Vue({
     },
 
     /**
-    * Funcion para enviar mails a todos los sectores avisando que hay un nuevo newsletter para editar / completar
+    * Funcion para preparar el envio por mail del nuevo nuesletter a edita
     * @param int {id} - id del newsletter a editar
-    * @param string {action} - nombre de la accion (add/edit/delete)
     */
     newsletterToSend(id) {
 
@@ -861,11 +895,16 @@ let app = new Vue({
 
     },
 
+    /**
+    * Funcion para cambiar el estado del newsletter (publicado / borrador)
+    * @param int {id} - id del newsletter a cambiar el estado
+    * @param status {int} - valor 1 / 0 en el campo "execute" de la base de datos
+    */
     changeStatus: function(id, status) {
+      loader();
 
       let url = root + 'php/changeStatusNewsletter.php';
 
-      loader();
       $.ajax({
         type: 'POST',
         url: url,
@@ -939,7 +978,6 @@ $('#modalNewEvent').on('hide.bs.modal', function () {
 })
 
 $('#modalNewNewsletter').on('hide.bs.modal', function () {
-  // app.resetInputsFromDateCalendar();
   app.newsletterEditMode = false;
   app.errors = [];
 })

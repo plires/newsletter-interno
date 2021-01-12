@@ -3,7 +3,6 @@
 	include('con.php');
 
 	function createVarialbesSession($user){
-		session_start();
 		$_SESSION['email'] = $user['email'];
 		$_SESSION['rol'] = $user['rol'];
 		$_SESSION['sector_code'] = $user['code'];
