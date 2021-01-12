@@ -447,8 +447,8 @@
 <script src="js/axios.min.js"></script>
 
 <!-- versión de desarrollo, incluye advertencias de ayuda en la consola -->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 <!-- Scripts custom -->
 <script src="js/app.js"></script>
