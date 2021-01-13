@@ -26,15 +26,48 @@ let app = new Vue({
       calendarEditMode: false,
       newsletterEditMode: false,
       errors: [],
+      user: {},
+      changePass: false,
+      errorsUser: []
     }
   },
   mounted() {
     this.getNewslettersCurrentYear()
     this.getTablesCurrentYear()
     this.getCalendarsCurrentYear()
+    this.getUsers()
     this.setCurrentSector()
   },
   methods: {
+
+    /**
+    * Funcion que trae al usuario en curso y lo asigna a una variable global
+    * @return this.user {object} - objecto con los datos del usuario
+    */
+    getUsers() { 
+      loader();
+
+      this.user = {}; // Inicializo con el objeto vacio.
+
+      axios.all([
+          axios.get(root + 'php/getUsers.php')
+        ])
+        .then(axios.spread((users) => {
+
+          //Convertimos los tipos de datos
+          users.data.forEach( function(element) {
+
+            if (element.id == userId) {
+              app.user = element
+            }
+            
+          });
+          delete this.user['pass'];
+
+        $('#loader').fadeOut(500);
+
+      }));
+    },
 
     /**
     * Funcion que trae las tablas asociadas a los newsletters del año en curso 
@@ -117,6 +150,74 @@ let app = new Vue({
       }));
     },
 
+    checkFormUser: function() {
+
+      this.errorsUser = [];
+
+      if (!this.user.email) {
+        this.errorsUser.push('El email de contacto obligatorio.');
+      }
+
+      if (this.changePass) {
+
+        let pass = $('#pass').val();
+        let cpass = $('#cpass').val();
+
+        if (!pass || !cpass ) {
+          this.errorsUser.push('Ingresa la contraseña.');
+        }
+
+        if (pass != cpass ) {
+          this.errorsUser.push('Las contraseñas no coinciden.');
+        } 
+
+        if (pass.length < 6 || cpass.length < 6 ) {
+          this.errorsUser.push('Las contraseñas deben tener al menos 6 caracteres.');
+        } 
+
+      }
+
+    return this.errorsUser;
+    },
+
+    submitFormUser(e){
+      e.preventDefault();
+      this.checkFormUser();
+
+      if (this.errorsUser.length === 0) {
+
+        let data = $('#formUser').serialize();
+
+        let url = root + 'php/editUser.php';
+
+        loader();
+        $.ajax({
+          type: 'POST',
+          url: url,
+          data: data,
+          success: function(response) {
+            if (response) {
+              $('#modalUser').modal('hide');
+              createToasts('bg-success', 'Usuario', 'Edición', 'El usuario se editó existosamente.')
+              app.getUsers();
+              $('#loader').fadeOut(500);
+            } else {
+              createToasts('bg-danger', 'Newsletter', 'Accion', 'Hubo un error, intente nuevamente.')
+            }
+          },
+          fail: function() {
+            $('#loader').fadeOut(500);
+            createToasts('bg-danger', 'Newsletter', 'Accion', 'Hubo un error, intente nuevamente.')
+          }
+        });
+
+      }
+    },
+
+    rememberPassword() {
+      this.changePass = !this.changePass;
+    },
+
     /**
     * Funcion que Trae el newsleter proximo a publicarse ( el que se encuentra en edicion ) 
     * @return this.currentNewsletter {object} - objecto con el newsletter activo en ese momento
@@ -179,10 +280,17 @@ let app = new Vue({
     initSummerNote: function(editorName, fieldDB, sectionPreview) { 
       this.editorName = editorName // Se asigna el campo a editar.
 
+      console.log(editorName)
+
       $('#'+fieldDB).css('display','flex'); // Se muestra el editor
       $('#'+sectionPreview).css('display','none'); // Se oculta el preview
 
-      if (editorName === 'comment_calendar') { //Sacamos el video y las imagenes del summernote si se trata de los comentarios del calendario
+      if ( editorName === 'comment_calendar' || 
+        editorName === 'comment_comment_table_a' || 
+        editorName === 'comment_comment_table_b' || 
+        editorName === 'comment_comment_table_c' ||
+        editorName === 'comment_observations_table' ) { //Sacamos el video y las imagenes del summernote si se trata de 
+                                                        //los comentarios del calendario y las observaciones de tablas
         var insert = ['link']
       } else {
         var insert = ['link', 'picture', 'video']
@@ -706,7 +814,7 @@ let app = new Vue({
     },
 
     /**
-    * Funcion que guarda la tabla en base de datosw
+    * Funcion que guarda la tabla en base de datos
     * @param evento {e} - datos del evento
     */
     submitUploadTable:function(e){

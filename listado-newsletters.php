@@ -12,6 +12,7 @@
     <script>
       let sectorName='<?php echo $_SESSION["sector_name"];?>';
       let sectorCode='<?php echo $_SESSION["sector_code"];?>';
+      let userId='<?php echo $_SESSION["user_id"];?>';
     </script>
 
   <?php 
@@ -60,6 +61,10 @@
         <!-- Loader -->
         <?php require('includes/loader.inc.php'); ?>
         <!-- Loader end -->
+
+        <!-- Modal formulario usuario -->
+        <?php require_once('includes/userModal.inc.php'); ?>
+        <!-- Modal formulario usuario end -->
 
         <div class="container">
 
@@ -194,6 +199,7 @@
 
 <!-- AdminLTE -->
 <script src="dist/js/adminlte.min.js"></script>
+
 <!-- axios -->
 <script src="js/axios.min.js"></script>
 

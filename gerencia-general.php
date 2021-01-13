@@ -12,6 +12,7 @@
     <script>
       let sectorName='<?php echo $_SESSION["sector_name"];?>';
       let sectorCode='<?php echo $_SESSION["sector_code"];?>';
+      let userId='<?php echo $_SESSION["user_id"];?>';
     </script>
 
   <?php 
@@ -62,6 +63,10 @@
         <!-- Loader -->
         <?php require('includes/loader.inc.php'); ?>
         <!-- Loader end -->
+
+        <!-- Modal formulario usuario -->
+        <?php require('includes/userModal.inc.php'); ?>
+        <!-- Modal formulario usuario end -->
 
         <div class="container">
 
@@ -156,16 +161,22 @@
 
 <!-- jQuery -->
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- overlayScrollbars -->
 <script src="node_modules/overlayscrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
 <!-- Summernote -->
 <script src="node_modules/summernote/dist/summernote-bs4.js"></script>
+
 <!-- Lang Summernote -->
 <script src="js/summernote-es-ES.js"></script>
+
 <!-- AdminLTE -->
 <script src="dist/js/adminlte.min.js"></script>
+
 <!-- axios -->
 <script src="js/axios.min.js"></script>
 

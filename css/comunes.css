@@ -18,6 +18,7 @@
  .nav-link { display: flex; align-items: center; }
  .user-panel, .user-panel .info { white-space: normal; }
  aside .active { background-color: #007bff!important; color: white!important; box-shadow: none!important; font-weight: 700!important; }
+ aside .configuracion_usuario { cursor: pointer;  }
 
  .card { width: 100%; }
  .note-float-left { margin-right: 10px; }

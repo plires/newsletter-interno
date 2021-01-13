@@ -12,6 +12,7 @@
     <script>
       let sectorName='<?php echo $_SESSION["sector_name"];?>';
       let sectorCode='<?php echo $_SESSION["sector_code"];?>';
+      let userId='<?php echo $_SESSION["user_id"];?>';
     </script>
 
   <?php 
@@ -64,6 +65,10 @@
         <!-- Loader -->
         <?php require('includes/loader.inc.php'); ?>
         <!-- Loader end -->
+
+        <!-- Modal formulario usuario -->
+        <?php require('includes/userModal.inc.php'); ?>
+        <!-- Modal formulario usuario end -->
 
         <div class="container">
 
