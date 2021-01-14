@@ -5,3 +5,4 @@ uploads/
 vistage_2020-11-22.sql
 datos.csv
 *.sql
+includes/config.inc
