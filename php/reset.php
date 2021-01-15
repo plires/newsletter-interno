@@ -19,7 +19,7 @@
 
 		include('includes/emails/reset-password/template-reset-pass.inc.php'); // Cargo el contenido del email a enviar al usuario.
 
-		mail($email, 'Reseteo de contraseña - Newsletter Interno Vistage', $body,"MIME-Version: 1.0\nContent-type: text/html; charset=UTF-8\nFrom: Newsletter Vistage < info@no-reply.com >");
+		mail($email, 'Reseteo de contraseña - Newsletter Interno Vistage', $body,"MIME-Version: 1.0\nContent-type: text/html; charset=UTF-8\nFrom: Newsletter Vistage < reset@vistage.com.ar >");
 
 		$sql = "UPDATE users SET pass = :pass WHERE id = '$id' ";
 		

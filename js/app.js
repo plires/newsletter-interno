@@ -925,6 +925,9 @@ let app = new Vue({
           $('.alert').removeClass('alert-danger');
           $('.alert').addClass('alert-success');
           var message = `<p>Se enviaron los avisos a todas las casillas de email</p>`
+          setTimeout(function(){ 
+            $('#modalSendEmails').modal('hide')
+          }, 3000);
         } else {
 
           $('.alert').removeClass('alert-success');

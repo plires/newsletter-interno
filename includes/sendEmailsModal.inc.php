@@ -1,8 +1,4 @@
 <!-- Modal Envio de Emails -->
-<?php 
-  
-?>
-
 <div class="modal fade" id="modalSendEmails">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">

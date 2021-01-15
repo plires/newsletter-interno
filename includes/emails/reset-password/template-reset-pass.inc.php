@@ -19,16 +19,22 @@ $body = '
     <table bgcolor="#fff" width="95%" border="0" cellpadding="0" cellspacing="0">
       <tr>
            <td height="40" style="font-size:10px; line-height:10px;">&nbsp;</td>
-       </tr>
-     
+      </tr>
+
+      <tr>
+          <td align="center" valign="top">
+            <img src="https://vistage.com.ar/2020/news/diciembre/img/vistage-email.gif" style="margin:0; padding:0; border:none; display:block;" border="0" alt="logo" /> 
+          </td>
+      </tr>
+
       </tr>
        <tr>
            <td height="40" style="font-size:10px; line-height:10px;">&nbsp;</td>
        </tr>
       <tr>
           <td align="center" valign="top">
-            <h1>Hola, aca esta tu nueva contraseña para poder ingresar a tu backend!</h1> <br>
-
+            <h1>Hola, aca esta tu nueva contraseña para poder ingresar a tu backend!</h1>
+            <h2>Una vez ingresado podrás cambiarla por otra ;).</h2>
             <h3>
                 <strong>Nueva contraseña: </strong> '.$passNew.'
             </h3>

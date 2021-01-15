@@ -50,6 +50,9 @@ try {
   //From
   $mail->setFrom(EMAIL_SENDER_SHOW, NAME_SENDER_SHOW);
 
+  //ReplyTo
+  $mail->addReplyTo(EMAIL_ADD_REPLY_TO, NAME_ADD_REPLY_TO);
+
   //To
   foreach ($emails as $email) {
   	$mail->addAddress($email['email']);     // Add a recipient
