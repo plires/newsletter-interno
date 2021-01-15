@@ -3,19 +3,11 @@
   session_start();
 
   // Acceso permitido a sector Gerencia de Talentos y Admin unicamente.
-  if (!$_SESSION || $_SESSION['sector_code'] != 'gerencia-talento' && $_SESSION['sector_code'] != 'all') { 
+  if (!$_SESSION || $_SESSION['sector_code'] != 'gerencia-talento' && $_SESSION['sector_code'] != 'listado-newsletters') { 
     session_destroy();
     header('Location: ./');
   } else {
-  ?>
-
-    <script>
-      let sectorName='<?php echo $_SESSION["sector_name"];?>';
-      let sectorCode='<?php echo $_SESSION["sector_code"];?>';
-      let userId='<?php echo $_SESSION["user_id"];?>';
-    </script>
-
-  <?php 
+    include_once('includes/variables-session.inc'); 
   }
 
   include_once('includes/config.inc');

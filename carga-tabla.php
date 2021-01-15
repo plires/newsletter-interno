@@ -2,20 +2,12 @@
   
   session_start();
 
-  // Acceso permitido a sector Administracion y Finanzas y Admin unicamente.
-  if (!$_SESSION || $_SESSION['sector_code'] != 'administracion-finanzas' && $_SESSION['sector_code'] != 'all') { 
+  // Acceso permitido a sector carga-tabla y Admin unicamente.
+  if (!$_SESSION || $_SESSION['sector_code'] != 'carga-tabla' && $_SESSION['sector_code'] != 'listado-newsletters') { 
     session_destroy();
     header('Location: ./');
   } else {
-  ?>
-
-    <script>
-      let sectorName='<?php echo $_SESSION["sector_name"];?>';
-      let sectorCode='<?php echo $_SESSION["sector_code"];?>';
-      let userId='<?php echo $_SESSION["user_id"];?>';
-    </script>
-
-  <?php 
+    include_once('includes/variables-session.inc'); 
   }
 
   include_once('includes/config.inc');
@@ -155,7 +147,7 @@
                   <div class="card card-primary">
 
                     <div class="card-header">
-                      <h3 class="card-title">Preview. {{ currentNewsletter.name }}</h3>
+                      <h3 class="card-title">Comentarios Tabla A</h3>
                     </div>
 
                     <div v-html="currentNewsletter.comment_table_a" class="card-body">
@@ -173,7 +165,7 @@
                   <div class="card card-warning">
 
                     <div class="card-header">
-                      <h3 class="card-title">Edición habilitada. {{ currentNewsletter.name }}</h3>
+                      <h3 class="card-title">Edición habilitada. Comentarios Tabla A</h3>
                     </div>
 
                     <!-- form start -->
@@ -202,7 +194,7 @@
                   <div class="card card-primary">
 
                     <div class="card-header">
-                      <h3 class="card-title">Preview. {{ currentNewsletter.name }}</h3>
+                      <h3 class="card-title">Comentarios Tabla B</h3>
                     </div>
 
                     <div v-html="currentNewsletter.comment_table_b" class="card-body">
@@ -220,7 +212,7 @@
                   <div class="card card-warning">
 
                     <div class="card-header">
-                      <h3 class="card-title">Edición habilitada. {{ currentNewsletter.name }}</h3>
+                      <h3 class="card-title">Edición habilitada. Comentarios Tabla B</h3>
                     </div>
 
                     <!-- form start -->
@@ -249,7 +241,7 @@
                   <div class="card card-primary">
 
                     <div class="card-header">
-                      <h3 class="card-title">Preview. {{ currentNewsletter.name }}</h3>
+                      <h3 class="card-title">Comentarios Tabla C</h3>
                     </div>
 
                     <div v-html="currentNewsletter.comment_table_c" class="card-body">
@@ -267,7 +259,7 @@
                   <div class="card card-warning">
 
                     <div class="card-header">
-                      <h3 class="card-title">Edición habilitada. {{ currentNewsletter.name }}</h3>
+                      <h3 class="card-title">Edición habilitada. Comentarios Tabla C</h3>
                     </div>
 
                     <!-- form start -->
@@ -296,7 +288,7 @@
                   <div class="card card-primary">
 
                     <div class="card-header">
-                      <h3 class="card-title">Preview. {{ currentNewsletter.name }}</h3>
+                      <h3 class="card-title">Observaciones Tabla</h3>
                     </div>
 
                     <div v-html="currentNewsletter.observations_table" class="card-body">
@@ -314,7 +306,7 @@
                   <div class="card card-warning">
 
                     <div class="card-header">
-                      <h3 class="card-title">Edición habilitada. {{ currentNewsletter.name }}</h3>
+                      <h3 class="card-title">Edición habilitada. Observaciones de la Tabla</h3>
                     </div>
 
                     <!-- form start -->

@@ -19,6 +19,9 @@
  .user-panel, .user-panel .info { white-space: normal; }
  aside .active { background-color: #007bff!important; color: white!important; box-shadow: none!important; font-weight: 700!important; }
  aside .configuracion_usuario { cursor: pointer;  }
+ aside .aside_datos_user { color: #a3c6e6; font-size: 0.85rem; margin: 0; padding-left: 10px; }
+ aside .aside_nombre_usuario { color: #a3c6e6!important; }
+ aside .aside_nombre_usuario:hover { color: white!important; }
 
  .card { width: 100%; }
  .note-float-left { margin-right: 10px; }

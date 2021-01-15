@@ -197,12 +197,18 @@ let app = new Vue({
           data: data,
           success: function(response) {
             if (response) {
+
               $('#modalUser').modal('hide');
               createToasts('bg-success', 'Usuario', 'Edición', 'El usuario se editó existosamente.')
               app.getUsers();
+              console.log(app.user)
+              // app.currentSector.userName 
               $('#loader').fadeOut(500);
+
             } else {
+
               createToasts('bg-danger', 'Newsletter', 'Accion', 'Hubo un error, intente nuevamente.')
+
             }
           },
           fail: function() {
@@ -268,8 +274,11 @@ let app = new Vue({
     * @return this.currentSector.code {string} - Codigo del sector
     */
     setCurrentSector: function() { 
-      this.currentSector.name = sectorName; // variable "sectorName" viene de la variable de session de PHP que se asigna en el login.
-      this.currentSector.code = sectorCode; // variable "sectorCode" viene de la variable de session de PHP que se asigna en el login.
+      this.currentSector.name = sectorName; // variable "sectorName" ver archivo "includes/variables-session.inc"
+      this.currentSector.code = sectorCode; // variable "sectorCode" ver archivo "includes/variables-session.inc"
+      this.currentSector.userName = userName; // variable "userName" ver archivo "includes/variables-session.inc"
+      this.currentSector.userEmail = userEmail; // variable "userEmail" ver archivo "includes/variables-session.inc"
+      this.currentSector.userRol = userRol; // variable "userRol" ver archivo "includes/variables-session.inc"
     },
 
     /**
@@ -343,12 +352,12 @@ let app = new Vue({
 
       updateNewsletter.then(function(result) {
         if (result) {
+
           app.getNewslettersCurrentYear()
-          $('.summernote').summernote('destroy');
           createToasts('bg-success', 'Newsletter', 'Accion', 'Evento guardado con éxito.')
           $('#'+column).css('display','none'); // Se oculta  el summernote editado
-
           $('#'+sectionPreview).css('display','flex'); // Se muestra el preview
+          $('.summernote').summernote('destroy');
 
         } else {
           createToasts('bg-danger', 'Newsletter', 'Accion', 'Hubo un error al guardar el dato.')
@@ -356,6 +365,7 @@ let app = new Vue({
         }
       });
 
+      $('.summernote').summernote('destroy');
       $('#loader').fadeOut(500);
 
     },
@@ -1039,7 +1049,21 @@ let app = new Vue({
   },
 
   computed: {
-     /**
+    /**
+    * Funcion que devuelve el nombre del usuario en curso
+    */
+    getNameUser: function() {
+      return this.user.name
+    },
+
+    /**
+    * Funcion que devuelve el email del usuario en curso
+    */
+    getEmailUser: function() {
+      return this.user.email
+    },
+
+    /**
     * Funcion que devuelve la tabla del newsletter en curso
     */
     currentTable: function() {

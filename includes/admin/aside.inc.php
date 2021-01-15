@@ -13,8 +13,13 @@
         <img src="img/logo-vistage-20-anos.gif" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="logout.php" class="d-block transition"><i class="mr-2 fas fa-sign-out-alt"></i>{{ currentSector.name }}</a>
+        <a href="logout.php" class="d-block transition aside_nombre_usuario"><i class="mr-2 fas fa-sign-out-alt"></i>{{ getNameUser }}</a>
       </div>
+    </div>
+
+    <div class="info">
+      <p class="aside_datos_user">{{ currentSector.name }}</p>
+      <p class="aside_datos_user">{{ getEmailUser }}</p>
     </div>
 
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -31,7 +36,7 @@
         
         <li class="nav-header">SECTORES</li>
 
-        <li v-if="currentSector.code == 'gerencia-general' || currentSector.code == 'all'" class="nav-item">
+        <li v-if="currentSector.code == 'gerencia-general' || currentSector.code == 'listado-newsletters'" class="nav-item">
           <a href="gerencia-general.php" class="nav-link transition <?php if ($current === 'gerencia-general') echo ' active'; ?>">
             <i class="nav-icon fas fa-users"></i>
             <p>
@@ -40,7 +45,7 @@
           </a>
         </li>
 
-        <li v-if="currentSector.code == 'gerencia-talento' || currentSector.code == 'all'" class="nav-item">
+        <li v-if="currentSector.code == 'gerencia-talento' || currentSector.code == 'listado-newsletters'" class="nav-item">
           <a href="gerencia-talento.php" class="nav-link transition <?php if ($current === 'gerencia-talento') echo ' active'; ?>">
             <i class="nav-icon fas fa-users"></i>
             <p>
@@ -49,7 +54,7 @@
           </a>
         </li>
 
-        <li v-if="currentSector.code == 'administracion-finanzas' || currentSector.code == 'all'" class="nav-item">
+        <li v-if="currentSector.code == 'administracion-finanzas' || currentSector.code == 'listado-newsletters'" class="nav-item">
           <a href="administracion-finanzas.php" class="nav-link transition <?php if ($current === 'administracion-finanzas') echo ' active'; ?>">
             <i class="nav-icon fas fa-users"></i>
             <p>
@@ -58,7 +63,7 @@
           </a>
         </li>
 
-        <li v-if="currentSector.code == 'marketing' || currentSector.code == 'all'" class="nav-item">
+        <li v-if="currentSector.code == 'marketing' || currentSector.code == 'listado-newsletters'" class="nav-item">
           <a href="marketing.php" class="nav-link transition <?php if ($current === 'marketing') echo ' active'; ?>">
             <i class="nav-icon fas fa-users"></i>
             <p>
@@ -67,7 +72,7 @@
           </a>
         </li>
 
-        <li v-if="currentSector.code == 'operaciones' || currentSector.code == 'all'" class="nav-item">
+        <li v-if="currentSector.code == 'operaciones' || currentSector.code == 'listado-newsletters'" class="nav-item">
           <a href="operaciones.php" class="nav-link transition <?php if ($current === 'operaciones') echo ' active'; ?>">
             <i class="nav-icon fas fa-users"></i>
             <p>
@@ -76,7 +81,7 @@
           </a>
         </li>
 
-        <li v-if="currentSector.code == 'all'" class="nav-item">
+        <li v-if="currentSector.code == 'listado-newsletters'" class="nav-item">
           <a href="listado-newsletters.php" class="nav-link transition <?php if ($current === 'newsletters') echo ' active'; ?>">
             <i class="nav-icon fas fa-list"></i>
             <p>
@@ -85,7 +90,7 @@
           </a>
         </li>
 
-        <li v-if="currentSector.code == 'administracion-finanzas' || currentSector.code == 'all'" class="nav-item">
+        <li v-if="currentSector.code == 'carga-tabla' || currentSector.code == 'listado-newsletters'" class="nav-item">
           <a href="carga-tabla.php" class="nav-link transition <?php if ($current === 'tabla') echo ' active'; ?>">
             <i class="nav-icon fas fa-table"></i>
             <p>
@@ -94,7 +99,7 @@
           </a>
         </li>
 
-        <li v-if="currentSector.code == 'all'" class="nav-item">
+        <li v-if="currentSector.code == 'listado-newsletters'" class="nav-item">
           <a href="calendarios.php" class="nav-link transition <?php if ($current === 'calendario') echo ' active'; ?>">
             <i class="nav-icon fas fa-calendar-alt"></i>
             <p>

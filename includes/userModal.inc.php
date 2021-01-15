@@ -18,6 +18,11 @@
         <div class="modal-body">
 
           <div class="form-row">
+
+            <div class="form-group col-md-12">
+              <label for="user.name">Nombre</label>
+              <input type="text" v-model="user.name" class="form-control" id="user.name" name="user.name" placeholder="Ingresa tu nombre">
+            </div>
           
             <div class="form-group col-md-12">
               <label for="user.email">Email</label>
