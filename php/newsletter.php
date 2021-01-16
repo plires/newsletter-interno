@@ -67,6 +67,14 @@
 		  $stmt = $db->prepare($sql);
 		  $save = $stmt->execute();
 
+		  $sql = "DELETE FROM tables WHERE newsletter_id='$id'";
+		  $stmt = $db->prepare($sql);
+		  $stmt->execute();
+
+		  $sql = "DELETE FROM calendars WHERE newsletter_id='$id'";
+		  $stmt = $db->prepare($sql);
+		  $stmt->execute();
+
 		  echo json_encode($save);
 			break;
 	}
