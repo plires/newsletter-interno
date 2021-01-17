@@ -124,7 +124,7 @@
             <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
 
               <div class="card text-white mb-3" style="max-width: 18rem; margin: auto;">
-                <div class="card-header text-center"><i class="fas fa-calendar-alt"></i><p><?= strtoupper($calendar['name_day']) .' '. $calendar['number_day'] ?></p></div>
+                <div class="card-header text-center"><i class="fas fa-calendar-alt"></i><p><?= ucfirst($calendar['name_day']) .' '. $calendar['number_day'] ?></p></div>
                 <div class="card-body">
                   <p class="card-text"><?= $calendar['description'] ?></p>
                 </div>

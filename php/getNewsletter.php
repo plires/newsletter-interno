@@ -22,7 +22,7 @@
 
 	use Carbon\Carbon;
 	carbon::setLocale('es');
-	carbon::setUTF8(false);
+	carbon::setUTF8(true);
 	setlocale(LC_TIME, 'es_ES');
 	date_default_timezone_set('America/Argentina/Buenos_Aires');
 
@@ -44,6 +44,7 @@
 	$newsletter['name_month'] = ucfirst(getNameMonth($newsletter, 'localeMonth')); // Agregamos la posicion con el nombre
 
 	$calendars_final = [];
+
 	foreach ($calendars as $calendar) {
 		// CALENDARIOS: Agregamos diferentes posiciones con el nombre del mes a partir del numero, el numero y nombre del dia
 		$day = getNameDayAndNumber($calendar); // Obtenemos el nombre y numero del dia del evento
