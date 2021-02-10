@@ -56,7 +56,7 @@
         </div>
 
         <div class="row wow fadeInLeft">
-          <div class="col-lg-8">
+          <div class="col-lg-6">
             <div class="table-responsive">
               <table class="table table-hover">
                 <thead>
@@ -85,7 +85,7 @@
             </div>
           </div>
 
-          <div class="col-lg-4">
+          <div class="col-lg-5 offset-lg-1">
 
             <div class="jumbotron jumbotron-fluid wow fadeInRight">
               <p class="lead"><?= $newsletter['comment_table_a'] ?></p>
